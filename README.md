@@ -25,14 +25,13 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/RavenProject/Ravencoin/tags) are created
-regularly to indicate new official, stable release versions of Raven Core.
+completely stable. 
 
 Active development is done in the `develop` branch. 
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Developer IRC is inactive please join us on discord in #development. https://discord.gg/fndp4NBGct
+Developer IRC is inactive please join us on discord in #development. https://discord.gg/JqYb9ThrbP
 
 Testing
 -------

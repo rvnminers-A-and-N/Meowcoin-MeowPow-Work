@@ -1,11 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_COMPRESSOR_H
-#define RAVEN_COMPRESSOR_H
+#ifndef MEOWCOIN_COMPRESSOR_H
+#define MEOWCOIN_COMPRESSOR_H
 
 #include "primitives/transaction.h"
 #include "script/script.h"
@@ -119,4 +120,4 @@ public:
     }
 };
 
-#endif // RAVEN_COMPRESSOR_H
+#endif // MEOWCOIN_COMPRESSOR_H

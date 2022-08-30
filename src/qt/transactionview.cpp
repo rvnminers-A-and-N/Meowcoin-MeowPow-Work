@@ -1,12 +1,13 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "transactionview.h"
 
 #include "addresstablemodel.h"
-#include "ravenunits.h"
+#include "meowcoinunits.h"
 #include "csvmodelwriter.h"
 #include "editaddressdialog.h"
 #include "guiutil.h"
@@ -274,7 +275,7 @@ void TransactionView::setModel(WalletModel *_model)
         if (_model->getOptionsModel())
         {
             // Add third party transaction URLs to context menu
-            QStringList listUrls = GUIUtil::SplitSkipEmptyParts(_model->getOptionsModel()->getThirdPartyTxUrls(), "|");
+            QStringList listUrls = _model->getOptionsModel()->getThirdPartyTxUrls().split("|", QString::SkipEmptyParts);
             for (int i = 0; i < listUrls.size(); ++i)
             {
                 QString host = QUrl(listUrls[i].trimmed(), QUrl::StrictMode).host();
@@ -282,7 +283,7 @@ void TransactionView::setModel(WalletModel *_model)
                 {
                     QAction *thirdPartyTxUrlAction = new QAction(host, this); // use host as menu item label
                     if (i == 0)
-                        contextMenu->addSeparator()->setText(tr("Browse with:"));
+                        contextMenu->addSeparator();
                     contextMenu->addAction(thirdPartyTxUrlAction);
                     connect(thirdPartyTxUrlAction, SIGNAL(triggered()), mapperThirdPartyTxUrls, SLOT(map()));
                     mapperThirdPartyTxUrls->setMapping(thirdPartyTxUrlAction, listUrls[i].trimmed());
@@ -313,30 +314,30 @@ void TransactionView::chooseDate(int idx)
         break;
     case Today:
         transactionProxyModel->setDateRange(
-                GUIUtil::StartOfDay(current),
+                QDateTime(current),
                 TransactionFilterProxy::MAX_DATE);
         break;
     case ThisWeek: {
         // Find last Monday
         QDate startOfWeek = current.addDays(-(current.dayOfWeek()-1));
         transactionProxyModel->setDateRange(
-                GUIUtil::StartOfDay(startOfWeek),
+                QDateTime(startOfWeek),
                 TransactionFilterProxy::MAX_DATE);
 
         } break;
     case ThisMonth:
         transactionProxyModel->setDateRange(
-                GUIUtil::StartOfDay(QDate(current.year(), current.month(), 1)),
+                QDateTime(QDate(current.year(), current.month(), 1)),
                 TransactionFilterProxy::MAX_DATE);
         break;
     case LastMonth:
         transactionProxyModel->setDateRange(
-                GUIUtil::StartOfDay(QDate(current.year(), current.month(), 1).addMonths(-1)),
-                GUIUtil::StartOfDay(QDate(current.year(), current.month(), 1)));
+                QDateTime(QDate(current.year(), current.month(), 1).addMonths(-1)),
+                QDateTime(QDate(current.year(), current.month(), 1)));
         break;
     case ThisYear:
         transactionProxyModel->setDateRange(
-                GUIUtil::StartOfDay(QDate(current.year(), 1, 1)),
+                QDateTime(QDate(current.year(), 1, 1)),
                 TransactionFilterProxy::MAX_DATE);
         break;
     case Range:
@@ -374,7 +375,7 @@ void TransactionView::changedAmount()
     if(!transactionProxyModel)
         return;
     CAmount amount_parsed = 0;
-    if (RavenUnits::parse(model->getOptionsModel()->getDisplayUnit(), amountWidget->text(), &amount_parsed)) {
+    if (MeowcoinUnits::parse(model->getOptionsModel()->getDisplayUnit(), amountWidget->text(), &amount_parsed)) {
         transactionProxyModel->setMinAmount(amount_parsed);
     }
     else
@@ -415,7 +416,7 @@ void TransactionView::exportClicked()
     writer.addColumn(tr("Type"), TransactionTableModel::Type, Qt::EditRole);
     writer.addColumn(tr("Label"), 0, TransactionTableModel::LabelRole);
     writer.addColumn(tr("Address"), 0, TransactionTableModel::AddressRole);
-    writer.addColumn(RavenUnits::getAmountColumnTitle(model->getOptionsModel()->getDisplayUnit()), 0, TransactionTableModel::FormattedAmountRole);
+    writer.addColumn(MeowcoinUnits::getAmountColumnTitle(model->getOptionsModel()->getDisplayUnit()), 0, TransactionTableModel::FormattedAmountRole);
     if (AreAssetsDeployed()) {
         writer.addColumn(tr("Asset"), 0, TransactionTableModel::AssetNameRole);
     }
@@ -653,8 +654,8 @@ void TransactionView::dateRangeChanged()
     if(!transactionProxyModel)
         return;
     transactionProxyModel->setDateRange(
-            GUIUtil::StartOfDay(dateFrom->date()),
-            GUIUtil::StartOfDay(dateTo->date()).addDays(1));
+            QDateTime(dateFrom->date()),
+            QDateTime(dateTo->date()).addDays(1));
 }
 
 void TransactionView::focusTransaction(const QModelIndex &idx)

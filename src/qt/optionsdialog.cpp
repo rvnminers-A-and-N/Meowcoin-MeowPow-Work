@@ -1,19 +1,19 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/raven-config.h"
+#include "config/meowcoin-config.h"
 #endif
 
 #include "optionsdialog.h"
 #include "ui_optionsdialog.h"
 
-#include "ravenunits.h"
+#include "meowcoinunits.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
-#include "guiconstants.h" // for DEFAULT_IPFS_VIEWER and DEFAULT_THIRD_PARTY_BROWSERS
 
 #include "validation.h" // for DEFAULT_SCRIPTCHECK_THREADS and MAX_SCRIPTCHECK_THREADS
 #include "netbase.h"
@@ -75,10 +75,10 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     /* Display elements init */
     QDir translations(":translations");
 
-    ui->ravenAtStartup->setToolTip(ui->ravenAtStartup->toolTip().arg(tr(PACKAGE_NAME)));
-    ui->ravenAtStartup->setText(ui->ravenAtStartup->text().arg(tr(PACKAGE_NAME)));
+    ui->meowcoinAtStartup->setToolTip(ui->meowcoinAtStartup->toolTip().arg(tr(PACKAGE_NAME)));
+    ui->meowcoinAtStartup->setText(ui->meowcoinAtStartup->text().arg(tr(PACKAGE_NAME)));
 
-    ui->openRavenConfButton->setToolTip(ui->openRavenConfButton->toolTip().arg(tr(PACKAGE_NAME)));
+    ui->openMeowcoinConfButton->setToolTip(ui->openMeowcoinConfButton->toolTip().arg(tr(PACKAGE_NAME)));
 
     ui->lang->setToolTip(ui->lang->toolTip().arg(tr(PACKAGE_NAME)));
     ui->lang->addItem(QString("(") + tr("default") + QString(")"), QVariant(""));
@@ -110,14 +110,9 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     }
 #if QT_VERSION >= 0x040700
     ui->thirdPartyTxUrls->setPlaceholderText("https://example.com/tx/%s");
-    ui->ipfsUrl->setPlaceholderText(DEFAULT_IPFS_VIEWER);
 #endif
 
-    ui->unit->setModel(new RavenUnits(this));
-    QStringList currencyList;
-    for(int unitNum = 0; unitNum < CurrencyUnits::count() ; unitNum++) {
-        ui->currencyUnitIndex->addItem(QString(CurrencyUnits::CurrencyOptions[unitNum].Header), unitNum);
-    }
+    ui->unit->setModel(new MeowcoinUnits(this));
 
     /* Widget-to-option mapper */
     mapper = new QDataWidgetMapper(this);
@@ -174,14 +169,13 @@ void OptionsDialog::setModel(OptionsModel *_model)
     /* Display */
     connect(ui->lang, SIGNAL(valueChanged()), this, SLOT(showRestartWarning()));
     connect(ui->thirdPartyTxUrls, SIGNAL(textChanged(const QString &)), this, SLOT(showRestartWarning()));
-    connect(ui->ipfsUrl, SIGNAL(textChanged(const QString &)), this, SLOT(showRestartWarning()));
     connect(ui->darkModeCheckBox, SIGNAL(clicked(bool)), this, SLOT(showRestartWarning()));
 }
 
 void OptionsDialog::setMapper()
 {
     /* Main */
-    mapper->addMapping(ui->ravenAtStartup, OptionsModel::StartAtStartup);
+    mapper->addMapping(ui->meowcoinAtStartup, OptionsModel::StartAtStartup);
     mapper->addMapping(ui->threadsScriptVerif, OptionsModel::ThreadsScriptVerif);
     mapper->addMapping(ui->databaseCache, OptionsModel::DatabaseCache);
 
@@ -213,9 +207,7 @@ void OptionsDialog::setMapper()
     /* Display */
     mapper->addMapping(ui->lang, OptionsModel::Language);
     mapper->addMapping(ui->unit, OptionsModel::DisplayUnit);
-    mapper->addMapping(ui->currencyUnitIndex, OptionsModel::DisplayCurrencyIndex);
     mapper->addMapping(ui->thirdPartyTxUrls, OptionsModel::ThirdPartyTxUrls);
-    mapper->addMapping(ui->ipfsUrl, OptionsModel::IpfsUrl);
 }
 
 void OptionsDialog::setOkButtonState(bool fState)
@@ -241,13 +233,7 @@ void OptionsDialog::on_resetButton_clicked()
     }
 }
 
-void OptionsDialog::on_ipfsUrlReset_clicked()
-{
-    /* reset third-party IPFS viewer URL to default setting. */
-    ui->ipfsUrl->setText(DEFAULT_IPFS_VIEWER);
-}
-
-void OptionsDialog::on_openRavenConfButton_clicked()
+void OptionsDialog::on_openMeowcoinConfButton_clicked()
 {
     /* explain the purpose of the config file */
     QMessageBox::information(this, tr("Configuration options"),
@@ -255,7 +241,7 @@ void OptionsDialog::on_openRavenConfButton_clicked()
            "Additionally, any command-line options will override this configuration file."));
 
     /* show an error if there was some problem opening the file */
-    if (!GUIUtil::openRavenConf())
+    if (!GUIUtil::openMeowcoinConf())
         QMessageBox::critical(this, tr("Error"), tr("The configuration file could not be opened."));
 }
 
@@ -269,12 +255,6 @@ void OptionsDialog::on_okButton_clicked()
 void OptionsDialog::on_cancelButton_clicked()
 {
     reject();
-}
-
-void OptionsDialog::on_thirdPartyTxUrlsReset_clicked()
-{
-    // reset thirdPartyTxUrls to default
-    ui->thirdPartyTxUrls->setText(DEFAULT_THIRD_PARTY_BROWSERS);
 }
 
 void OptionsDialog::on_hideTrayIcon_stateChanged(int fState)

@@ -1,10 +1,11 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_ADDRESSTABLEMODEL_H
-#define RAVEN_QT_ADDRESSTABLEMODEL_H
+#ifndef MEOWCOIN_QT_ADDRESSTABLEMODEL_H
+#define MEOWCOIN_QT_ADDRESSTABLEMODEL_H
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -27,7 +28,7 @@ public:
 
     enum ColumnIndex {
         Label = 0,   /**< User specified label */
-        Address = 1  /**< Raven address */
+        Address = 1  /**< Meowcoin address */
     };
 
     enum RoleIndex {
@@ -93,4 +94,4 @@ public Q_SLOTS:
     friend class AddressTablePriv;
 };
 
-#endif // RAVEN_QT_ADDRESSTABLEMODEL_H
+#endif // MEOWCOIN_QT_ADDRESSTABLEMODEL_H

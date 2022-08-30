@@ -1,11 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_NETMESSAGEMAKER_H
-#define RAVEN_NETMESSAGEMAKER_H
+#ifndef MEOWCOIN_NETMESSAGEMAKER_H
+#define MEOWCOIN_NETMESSAGEMAKER_H
 
 #include "net.h"
 #include "serialize.h"
@@ -34,4 +35,4 @@ private:
     const int nVersion;
 };
 
-#endif // RAVEN_NETMESSAGEMAKER_H
+#endif // MEOWCOIN_NETMESSAGEMAKER_H

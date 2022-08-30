@@ -1,11 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_UNDO_H
-#define RAVEN_UNDO_H
+#ifndef MEOWCOIN_UNDO_H
+#define MEOWCOIN_UNDO_H
 
 #include "compressor.h" 
 #include "consensus/consensus.h"
@@ -62,11 +63,11 @@ public:
 };
 
 static const size_t MIN_TRANSACTION_INPUT_WEIGHT = WITNESS_SCALE_FACTOR * ::GetSerializeSize(CTxIn(), SER_NETWORK, PROTOCOL_VERSION);
-/** RVN START */
-// Deprecated for RIP2 implementation
-//static const size_t MAX_INPUTS_PER_BLOCK = /*fAssetsIsActive ? MAX_BLOCK_WEIGHT_RIP2 / MIN_TRANSACTION_INPUT_WEIGHT :*/ MAX_BLOCK_WEIGHT / MIN_TRANSACTION_INPUT_WEIGHT;
+/** MEOWCOIN START */
+// Deprecated for HIP2 implementation
+//static const size_t MAX_INPUTS_PER_BLOCK = /*fAssetsIsActive ? MAX_BLOCK_WEIGHT_HIP2 / MIN_TRANSACTION_INPUT_WEIGHT :*/ MAX_BLOCK_WEIGHT / MIN_TRANSACTION_INPUT_WEIGHT;
 
-/** RVN END */
+/** MEOWCOIN END */
 
 /** Undo information for a CTransaction */
 class CTxUndo
@@ -91,7 +92,7 @@ public:
         uint64_t count = 0;
         ::Unserialize(s, COMPACTSIZE(count));
         if (fAssetsIsActive) {
-            if (count > MAX_BLOCK_WEIGHT_RIP2 / MIN_TRANSACTION_INPUT_WEIGHT) {
+            if (count > MAX_BLOCK_WEIGHT_HIP2 / MIN_TRANSACTION_INPUT_WEIGHT) {
                 throw std::ios_base::failure("Too many input undo records");
             }
         } else {
@@ -120,4 +121,4 @@ public:
     }
 };
 
-#endif // RAVEN_UNDO_H
+#endif // MEOWCOIN_UNDO_H

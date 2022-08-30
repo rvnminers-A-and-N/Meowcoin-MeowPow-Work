@@ -1,10 +1,11 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_OPTIONSMODEL_H
-#define RAVEN_QT_OPTIONSMODEL_H
+#ifndef MEOWCOIN_QT_OPTIONSMODEL_H
+#define MEOWCOIN_QT_OPTIONSMODEL_H
 
 #include "amount.h"
 
@@ -14,7 +15,7 @@ QT_BEGIN_NAMESPACE
 class QNetworkProxy;
 QT_END_NAMESPACE
 
-/** Interface from Qt to configuration data structure for Raven client.
+/** Interface from Qt to configuration data structure for meowcoin client.
    To Qt, the options are presented as a list with the different options
    laid out vertically.
    This can be changed to a tree once the settings become sufficiently
@@ -39,10 +40,8 @@ public:
         ProxyUseTor,            // bool
         ProxyIPTor,             // QString
         ProxyPortTor,           // int
-        DisplayUnit,            // RavenUnits::Unit
-        DisplayCurrencyIndex,   // int
+        DisplayUnit,            // MeowcoinUnits::Unit
         ThirdPartyTxUrls,       // QString
-        IpfsUrl,                // QString
         Language,               // QString
         CoinControlFeatures,    // bool
         ThreadsScriptVerif,     // int
@@ -62,17 +61,13 @@ public:
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
     /** Updates current unit in memory, settings and emits displayUnitChanged(newUnit) signal */
     void setDisplayUnit(const QVariant &value);
-    /** Updates current unit in memory, settings and emits displayCurrencyIndexChanged(newIndex) signal */
-    void setDisplayCurrencyIndex(const QVariant &value);
 
     /* Explicit getters */
     bool getHideTrayIcon() const { return fHideTrayIcon; }
     bool getMinimizeToTray() const { return fMinimizeToTray; }
     bool getMinimizeOnClose() const { return fMinimizeOnClose; }
     int getDisplayUnit() const { return nDisplayUnit; }
-    int getDisplayCurrencyIndex() const { return nDisplayCurrencyIndex; }
     QString getThirdPartyTxUrls() const { return strThirdPartyTxUrls; }
-    QString getIpfsUrl() const { return strIpfsUrl; }
     bool getProxySettings(QNetworkProxy& proxy) const;
     bool getCoinControlFeatures() const { return fCoinControlFeatures; }
     bool getCustomFeeFeatures() const { return fCustomFeeFeatures; }
@@ -90,14 +85,12 @@ private:
     bool fMinimizeOnClose;
     QString language;
     int nDisplayUnit;
-    int nDisplayCurrencyIndex;
     QString strThirdPartyTxUrls;
-    QString strIpfsUrl;
     bool fCoinControlFeatures;
-    /** RVN START*/
+    /** MEOWCOIN START*/
     bool fCustomFeeFeatures;
     bool fDarkModeEnabled;
-    /** RVN END*/
+    /** MEOWCOIN END*/
     /* settings that were overridden by command-line */
     QString strOverriddenByCommandLine;
 
@@ -108,10 +101,9 @@ private:
     void checkAndMigrate();
 Q_SIGNALS:
     void displayUnitChanged(int unit);
-    void displayCurrencyIndexChanged(int unit);
     void coinControlFeaturesChanged(bool);
     void customFeeFeaturesChanged(bool);
     void hideTrayIconChanged(bool);
 };
 
-#endif // RAVEN_QT_OPTIONSMODEL_H
+#endif // MEOWCOIN_QT_OPTIONSMODEL_H

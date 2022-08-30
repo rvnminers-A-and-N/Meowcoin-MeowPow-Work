@@ -1,58 +1,34 @@
-Meowcoin integration/staging tree
-=====================================
+Meowcoin Core
+==================================
 
-
+https://Meowcoin.lol
 
 What is Meowcoin?
-----------------
+-----------------
+Meowcoin is a blockchain that features assets and the ability to obtain cryptocurrency while playing games. While other cryptocurrencies use only Proof of Work(PoW), Meowcoin uses PoW and Proof of Game(PoG). PoG is a new way for gamers to participate in blockchain technology, simply by playing games. Until now, the minable cryptocurrency communities and gaming communities have been separated by a graphic card shortage. With Meowcoin, both these communities can come together and get a piece of the block. See the Meowcoin whitepaper: https://www.meowcoin.lol/whitepaper
 
-Meowcoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. The Meowcoin platform also lets anyone create assets (tokens) on the Meowcoin network. 
-Assets can be used for NFTs, STOs, Gift Cards, and fractional ownership of anything of value.
-Meowcoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. 
+We aim to allow gamers to play their favourite games and at the same time earn Meowcoin as a reward. Majority of our developers have been gaming for years and have some exciting features to add within our gaming servers. How will we do it? Well... the beauty of PC Gaming and even console (Yes, we have a way to make this happen) is that modding is available to implement all the monitoring features we need to make our vision a reality.
 
-
+Time after time we see blockchains popping up with no realistic goals or the work never carried out, this is why we provide a Proof of Concept on day one of launching. It's important to showcase our vision and how the barebones of the system will work and expand on this over the months and years.
 
 License
 -------
 
-Meow Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+Meowcoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
 
 Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. 
-
-Active development is done in the `develop` branch. 
+completely stable. [Tags](https://github.com/JustAResearcher/Meowcoin/tags) are created
+regularly to indicate new official, stable release versions of Meowcoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Developer IRC is inactive please join us on discord in #development. https://discord.gg/JqYb9ThrbP
-
 Testing
 -------
-
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test on short notice. Please be patient and help out by testing
-other people's pull requests, and remember this is a security-critical project where any mistake might cost people
-lots of money.
-
-Testnet is up and running and available to use during development.
-
-### Automated Testing
-
-Developers are strongly encouraged to write [unit tests](src/test/README.md) for new code, and to
-submit new unit tests for old code. Unit tests can be compiled and run
-(assuming they weren't disabled in configure) with: `make check`. Further details on running
-and extending unit tests can be found in [/src/test/README.md](/src/test/README.md).
-
-There are also [regression and integration tests](/test), written
-in Python, that are run automatically on the build server.
-These tests can be run (if the [test dependencies](/test) are installed) with: `test/functional/test_runner.py`
+Meowcoin Core is dedicated to ensure all new updates that are released will be thoroughly tested before entering the mainnet, this is why we have a testnet running alongside our main chain. While the testnet is running we will regularly run unit_testing that is built into Meowcoin Core and ensure all reports come back as PASSED.
 
 
 ### Manual Quality Assurance (QA) Testing
@@ -62,27 +38,13 @@ code. This is especially important for large or high-risk changes. It is useful
 to add a test plan to the pull request description if testing the changes is
 not straightforward.
 
-
 About Meowcoin
-----------------
-A digital peer to peer network for the facilitation of value transferf and the well being of cats world wide.
+--------------
 
+Meowcoin is the currency for investors, gamers and gaming developers. 
+Meowcoin will be implemented to games such as Minecraft, Roblox and many other popular games that allows custom modifications and servers.
+It does not stop there, with blockchain assets, developers can implement Meowcoin assets into any game and feature it in the upcoming Meowcoin marketplace.
 
+Thank you to the Bitcoin developers.
 
-
-
-
-
-Thank you to the Bitcoin developers. 
-
-The Meowcoin project is launched based on the hard work and continuous effort of over 400 Bitcoin developers who made over 14,000 commits over the life to date of the Bitcoin project. We are eternally grateful to you for your efforts and diligence in making a secure network and for their support of free and open source software development.  The Meowcoin experiment is made on the foundation you built.
-
-
-Abstract
-----------------
-Meowcoin aims to implement a blockchain which is optimized specifically for the use case of transferring value from one holder to another. Based on the extensive development and testing of Bitcoin, Meowcoin is built on a fork of the Bitcoin code. Key changes include a faster block reward time and a change in the number, but not weighed distribution schedule, of coins. Meowcoin is free and open source and will be issued and mined transparently with no pre-mine, developer allocation or any other similar set aside. Meowcoin is intended to prioritize user control, privacy and censorship resistance and be jurisdiction agnostic while allowing simple optional additional features for users based on need.
-
-
-
-A blockchain is a ledger showing the value of something and allowing it to be transferred to someone else. Of all the possible uses for blockchains, the reporting of who owns what is one of the core uses of the technology.  This is why the first and most successful use case for blockchain technology to date has been Bitcoin.
-
+Thank you to the Ravencoin developers.

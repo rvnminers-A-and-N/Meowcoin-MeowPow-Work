@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,7 +14,7 @@
 #include "core_io.h"
 #include "univalue.h"
 #include "assets/assettypes.h"
-#include "ravenunits.h"
+#include "meowcoinunits.h"
 #include "optionsmodel.h"
 #include "sendcoinsdialog.h"
 #include "coincontroldialog.h"
@@ -135,8 +136,7 @@ ReissueAssetDialog::ReissueAssetDialog(const PlatformStyle *_platformStyle, QWid
 
     ui->comboBox->setModel(proxy);
     ui->comboBox->setEditable(true);
-    ui->comboBox->lineEdit()->setPlaceholderText(tr("Select an asset to reissue.."));
-    ui->comboBox->lineEdit()->setToolTip(tr("Select the asset you want to reissue."));
+    ui->comboBox->lineEdit()->setPlaceholderText("Select an asset");
 
     completer = new QCompleter(proxy,this);
     completer->setCompletionMode(QCompleter::PopupCompletion);
@@ -189,14 +189,8 @@ void ReissueAssetDialog::setModel(WalletModel *_model)
         }
         connect(ui->confTargetSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(updateSmartFeeLabel()));
         connect(ui->confTargetSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(coinControlUpdateLabels()));
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-        connect(ui->groupFee, &QButtonGroup::idClicked, this, &ReissueAssetDialog::updateFeeSectionControls);
-        connect(ui->groupFee, &QButtonGroup::idClicked, this, &ReissueAssetDialog::coinControlUpdateLabels);
-#else
         connect(ui->groupFee, SIGNAL(buttonClicked(int)), this, SLOT(updateFeeSectionControls()));
         connect(ui->groupFee, SIGNAL(buttonClicked(int)), this, SLOT(coinControlUpdateLabels()));
-#endif
         connect(ui->customFee, SIGNAL(valueChanged()), this, SLOT(coinControlUpdateLabels()));
         connect(ui->checkBoxMinimumFee, SIGNAL(stateChanged(int)), this, SLOT(setMinimumFee()));
         connect(ui->checkBoxMinimumFee, SIGNAL(stateChanged(int)), this, SLOT(updateFeeSectionControls()));
@@ -226,7 +220,7 @@ void ReissueAssetDialog::setModel(WalletModel *_model)
         else
             ui->confTargetSelector->setCurrentIndex(getIndexForConfTarget(settings.value("nConfTarget").toInt()));
 
-        ui->reissueCostLabel->setText(tr("Cost") + ": " + RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetBurnAmount(AssetType::REISSUE)));
+        ui->reissueCostLabel->setText(tr("Cost") + ": " + MeowcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetBurnAmount(AssetType::REISSUE)));
         ui->reissueCostLabel->setStyleSheet("font-weight: bold");
 
         // Setup the default values
@@ -376,9 +370,6 @@ void ReissueAssetDialog::setupAssetDataView(const PlatformStyle *platformStyle)
     ui->currentDataLabel->setStyleSheet(STRING_LABEL_COLOR);
     ui->currentDataLabel->setFont(GUIUtil::getTopLabelFont());
 
-    ui->labelReissueAsset->setStyleSheet(STRING_LABEL_COLOR);
-    ui->labelReissueAsset->setFont(GUIUtil::getTopLabelFont());
-
     ui->reissueAssetDataLabel->setStyleSheet(STRING_LABEL_COLOR);
     ui->reissueAssetDataLabel->setFont(GUIUtil::getTopLabelFont());
 
@@ -438,7 +429,7 @@ void ReissueAssetDialog::setBalance(const CAmount& balance, const CAmount& uncon
 
     if(model && model->getOptionsModel())
     {
-        ui->labelBalance->setText(RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
+        ui->labelBalance->setText(MeowcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance));
     }
 }
 
@@ -514,7 +505,7 @@ void ReissueAssetDialog::CheckFormState()
     const CTxDestination dest = DecodeDestination(ui->addressText->text().toStdString());
     if (!ui->addressText->text().isEmpty()) {
         if (!IsValidDestination(dest)) {
-            showMessage(tr("Invalid Raven Destination Address"));
+            showMessage(tr("Invalid meowcoin Destination Address"));
             return;
         }
     }
@@ -544,7 +535,7 @@ void ReissueAssetDialog::CheckFormState()
 
             if (fHasQuantity && !IsValidDestination(dest)) {
                 ui->addressText->setStyleSheet(STYLE_INVALID);
-                showMessage(tr("Warning: Invalid Raven address"));
+                showMessage(tr("Warning: Invalid meowcoin address"));
                 return;
             }
 
@@ -800,7 +791,7 @@ bool ReissueAssetDialog::checkIPFSHash(QString hash)
     if (!hash.isEmpty()) {
         if (!AreMessagesDeployed()) {
             if (hash.length() > 46) {
-                showMessage(tr("Only IPFS Hashes allowed until RIP5 is activated"));
+                showMessage(tr("Only IPFS Hashes allowed until HIP5 is activated"));
                 disableReissueButton();
                 return false;
             }
@@ -941,7 +932,7 @@ void ReissueAssetDialog::onReissueAssetClicked()
     QStringList formatted;
 
     // generate bold amount string
-    QString amount = "<b>" + QString::fromStdString(ValueFromAmountString(GetReissueAssetBurnAmount(), 8)) + " RVN";
+    QString amount = "<b>" + QString::fromStdString(ValueFromAmountString(GetReissueAssetBurnAmount(), 8)) + " MEWC";
     amount.append("</b>");
     // generate monospace address string
     QString addressburn = "<span style='font-family: monospace;'>" + QString::fromStdString(GetParams().ReissueAssetBurnAddress());
@@ -970,7 +961,7 @@ void ReissueAssetDialog::onReissueAssetClicked()
     {
         // append fee string if a fee is required
         questionString.append("<hr /><span style='color:#aa0000;'>");
-        questionString.append(RavenUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nFeeRequired));
+        questionString.append(MeowcoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nFeeRequired));
         questionString.append("</span> ");
         questionString.append(tr("added as transaction fee"));
 
@@ -982,13 +973,13 @@ void ReissueAssetDialog::onReissueAssetClicked()
     questionString.append("<hr />");
     CAmount totalAmount = GetReissueAssetBurnAmount() + nFeeRequired;
     QStringList alternativeUnits;
-    for (RavenUnits::Unit u : RavenUnits::availableUnits())
+    for (MeowcoinUnits::Unit u : MeowcoinUnits::availableUnits())
     {
         if(u != model->getOptionsModel()->getDisplayUnit())
-            alternativeUnits.append(RavenUnits::formatHtmlWithUnit(u, totalAmount));
+            alternativeUnits.append(MeowcoinUnits::formatHtmlWithUnit(u, totalAmount));
     }
     questionString.append(tr("Total Amount %1")
-                                  .arg(RavenUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), totalAmount)));
+                                  .arg(MeowcoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), totalAmount)));
     questionString.append(QString("<span style='font-size:10pt;font-weight:normal;'><br />(=%2)</span>")
                                   .arg(alternativeUnits.join(" " + tr("or") + "<br />")));
 
@@ -1071,7 +1062,7 @@ void ReissueAssetDialog::updateSmartFeeLabel()
     FeeCalculation feeCalc;
     CFeeRate feeRate = CFeeRate(GetMinimumFee(1000, coin_control, ::mempool, ::feeEstimator, &feeCalc));
 
-    ui->labelSmartFee->setText(RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), feeRate.GetFeePerK()) + "/kB");
+    ui->labelSmartFee->setText(MeowcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), feeRate.GetFeePerK()) + "/kB");
 
     if (feeCalc.reason == FeeReason::FALLBACK) {
         ui->labelSmartFee2->show(); // (Smart fee not initialized yet. This usually takes a few blocks...)
@@ -1199,7 +1190,7 @@ void ReissueAssetDialog::coinControlChangeEdited(const QString& text)
         }
         else if (!IsValidDestination(dest)) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Raven address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid meowcoin address"));
         }
         else // Valid address
         {
@@ -1315,7 +1306,7 @@ void ReissueAssetDialog::updateFeeMinimizedLabel()
     if (ui->radioSmartFee->isChecked())
         ui->labelFeeMinimized->setText(ui->labelSmartFee->text());
     else {
-        ui->labelFeeMinimized->setText(RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) + "/kB");
+        ui->labelFeeMinimized->setText(MeowcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) + "/kB");
     }
 }
 
@@ -1323,7 +1314,7 @@ void ReissueAssetDialog::updateMinFeeLabel()
 {
     if (model && model->getOptionsModel())
         ui->checkBoxMinimumFee->setText(tr("Pay only the required fee of %1").arg(
-                RavenUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetRequiredFee(1000)) + "/kB")
+                MeowcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), GetRequiredFee(1000)) + "/kB")
         );
 }
 

@@ -1,10 +1,11 @@
 // Copyright (c) 2011-2016 The Bitcoin Core developers
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_QT_GUIUTIL_H
-#define RAVEN_QT_GUIUTIL_H
+#ifndef MEOWCOIN_QT_GUIUTIL_H
+#define MEOWCOIN_QT_GUIUTIL_H
 
 #include "amount.h"
 #include "fs.h"
@@ -31,7 +32,7 @@ class QWidget;
 class QGraphicsDropShadowEffect;
 QT_END_NAMESPACE
 
-/** Utility functions used by the Raven Qt UI.
+/** Utility functions used by the meowcoin Qt UI.
  */
 namespace GUIUtil
 {
@@ -57,10 +58,10 @@ namespace GUIUtil
     void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent);
     void setupAmountWidget(QLineEdit *widget, QWidget *parent);
 
-    // Parse "raven:" URI into recipient object, return true on successful parsing
-    bool parseRavenURI(const QUrl &uri, SendCoinsRecipient *out);
-    bool parseRavenURI(QString uri, SendCoinsRecipient *out);
-    QString formatRavenURI(const SendCoinsRecipient &info);
+    // Parse "meowcoin:" URI into recipient object, return true on successful parsing
+    bool parseMeowcoinURI(const QUrl &uri, SendCoinsRecipient *out);
+    bool parseMeowcoinURI(QString uri, SendCoinsRecipient *out);
+    QString formatMeowcoinURI(const SendCoinsRecipient &info);
 
     // Returns true if given address+amount meets "dust" definition
     bool isDust(const QString& address, const CAmount& amount);
@@ -127,11 +128,11 @@ namespace GUIUtil
     void openDebugLogfile();
 
     // Open the config file
-    bool openRavenConf();
+    bool openMeowcoinConf();
 
     // Replace invalid default fonts with known good ones
     void SubstituteFonts(const QString& language);
-
+ 
     // Concatenate a string given the painter, static text width, left side of rect, and right side of rect
     // and which side the concatenated string is on (default left)
     void concatenate(QPainter* painter, QString& strToCon, int static_width, int left_side, int right_size);
@@ -270,43 +271,6 @@ namespace GUIUtil
     typedef ClickableProgressBar ProgressBar;
 #endif
 
-    /**
-     * Returns the start-moment of the day in local time.
-     *
-     * QDateTime::QDateTime(const QDate& date) is deprecated since Qt 5.15.
-     * QDate::startOfDay() was introduced in Qt 5.14.
-     */
-    QDateTime StartOfDay(const QDate& date);
-
-
-     /** 
-     * Splits the string into substrings wherever separator occurs, and returns
-     * the list of those strings. Empty strings do not appear in the result.
-     *
-     * QString::split() signature differs in different Qt versions:
-     *  - QString::SplitBehavior is deprecated since Qt 5.15
-     *  - Qt::SplitBehavior was introduced in Qt 5.14
-     * If {QString|Qt}::SkipEmptyParts behavior is required, use this
-     * function instead of QString::split().
-     */
-    template <typename SeparatorType>
-    QStringList SplitSkipEmptyParts(const QString& string, const SeparatorType& separator)
-    {
-    #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-        return string.split(separator, Qt::SkipEmptyParts);
-    #else
-        return string.split(separator, QString::SkipEmptyParts);
-    #endif
-    }
-
-     /**
-     * Returns true if pixmap has been set.
-     *
-     * QPixmap* QLabel::pixmap() is deprecated since Qt 5.15.
-     */
-    bool HasPixmap(const QLabel* label);
-    QImage GetImage(const QLabel* label);
-
 } // namespace GUIUtil
 
-#endif // RAVEN_QT_GUIUTIL_H
+#endif // MEOWCOIN_QT_GUIUTIL_H

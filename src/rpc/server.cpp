@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2017-2020 The Raven Core developers
+// Copyright (c) 2017-2020 The OLDNAMENEEDKEEP__Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -145,14 +145,14 @@ void RPCTypeCheckObj(const UniValue& o,
     }
 }
 
-CAmount AmountFromValue(const UniValue& value, bool p_isRVN)
+CAmount AmountFromValue(const UniValue& value, bool p_isMEWC)
 {
     if (!value.isNum() && !value.isStr())
         throw JSONRPCError(RPC_TYPE_ERROR, "Amount is not a number or string");
     CAmount amount;
     if (!ParseFixedPoint(value.getValStr(), 8, &amount))
         throw JSONRPCError(RPC_TYPE_ERROR, strprintf("Invalid amount (3): %s", value.getValStr()));
-    if (p_isRVN && !MoneyRange(amount))
+    if (p_isMEWC && !MoneyRange(amount))
         throw JSONRPCError(RPC_TYPE_ERROR, strprintf("Amount out of range: %s", amount));
     return amount;
 }
@@ -277,14 +277,14 @@ UniValue stop(const JSONRPCRequest& jsonRequest)
     if (jsonRequest.fHelp || jsonRequest.params.size() > 1)
         throw std::runtime_error(
             "stop\n"
-            "\nStop Raven server.");
+            "\nStop Meowcoin server.");
     // Event loop will exit after current HTTP requests have been handled, so
     // this reply will get back to the client.
     StartShutdown();
     if (jsonRequest.params[0].isNum()) {
         MilliSleep(jsonRequest.params[0].get_int());
     }
-    return "Raven server stopping";
+    return "Meowcoin server stopping";
 }
 
 UniValue uptime(const JSONRPCRequest& jsonRequest)
@@ -602,13 +602,13 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(const std::string& methodname, const std::string& args)
 {
-    return "> raven-cli " + methodname + " " + args + "\n";
+    return "> meowcoin-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(const std::string& methodname, const std::string& args)
 {
     return "> curl --user myusername --data-binary '{\"jsonrpc\": \"1.0\", \"id\":\"curltest\", "
-        "\"method\": \"" + methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:8766/\n";
+        "\"method\": \"" + methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:9766/\n";
 }
 
 void RPCSetTimerInterfaceIfUnset(RPCTimerInterface *iface)
@@ -652,7 +652,7 @@ void CheckIPFSTxidMessage(const std::string &message, int64_t expireTime)
     size_t msglen = message.length();
     if (msglen == 46 || msglen == 64) {
         if (msglen == 64 && !AreMessagesDeployed()) {
-            throw JSONRPCError(RPC_INVALID_PARAMS, std::string("Invalid txid hash, only ipfs hashes available until RIP5 is activated"));
+            throw JSONRPCError(RPC_INVALID_PARAMS, std::string("Invalid txid hash, only ipfs hashes available until HIP5 is activated"));
         }
     } else {
         if (msglen)

@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2019 The Raven Core developers
+// Copyright (c) 2020-2021 The Meowcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef RAVEN_ASSETDB_H
-#define RAVEN_ASSETDB_H
+#ifndef MEOWCOIN_ASSETDB_H
+#define MEOWCOIN_ASSETDB_H
 
 #include "fs.h"
 #include "serialize.h"
@@ -95,4 +96,4 @@ public:
 };
 
 
-#endif //RAVEN_ASSETDB_H
+#endif //MEOWCOIN_ASSETDB_H

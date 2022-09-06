@@ -259,7 +259,7 @@ public:
         nMessagingActivationBlock = 1; // Messaging activated block height
         nRestrictedActivationBlock = 1; // Restricted activated block height
 
-        nKAAAWWWPOWActivationTime = 1661833868;
+        nKAAAWWWPOWActivationTime = 1662493424;
         nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
     }
 };

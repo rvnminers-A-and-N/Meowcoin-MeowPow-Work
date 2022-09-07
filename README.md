@@ -3,6 +3,13 @@ Meowcoin Core
 
 https://Meowcoin.lol
 
+Meowcoin Specs
+-----------------
+P2P Port - 8788
+RPC Port - 9766
+Block Time - 1 min
+Block Reward - 5000 MEOW (3000 reward, 2000 donation)
+
 What is Meowcoin?
 -----------------
 Meowcoin is an experimental digital currency that enables instant payments to anyone, anywhere in the world. The Meowcoin platform also lets anyone create assets (tokens) on the Meowcoin network. Assets can be used for NFTs, STOs, Gift Cards, and fractional ownership of anything of value. Meowcoin uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network.

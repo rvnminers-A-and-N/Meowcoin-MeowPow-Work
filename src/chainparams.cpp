@@ -155,10 +155,10 @@ public:
 
 
         // The best chain should have at least this much work
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100010"); // Block 0
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000005de4c8dac20913"); // Block 12000
 
-        // By default assume that the signatures in ancestors of this block are valid. Block# 
-        consensus.defaultAssumeValid = uint256S("0x000000edd819220359469c54f2614b5602ebc775ea67a64602f354bdaa320f70"); // Block 0
+        // By default assume that the signatures in ancestors of this block are valid
+        consensus.defaultAssumeValid = uint256S("0x00000000001a45336692852c86060c48ea1b20d9dfbf97f77433b2fe38351fd9"); // Block 12000
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -204,16 +204,23 @@ public:
             {
             	{
             	    {0, uint256S("0x000000edd819220359469c54f2614b5602ebc775ea67a64602f354bdaa320f70")},
+                    {1, uint256S("0x003c8dc5fc743a984caab5d48ccac176504b04efc165670b5dc54e4b8c08a014")},
+                    {100, uint256S("0x008d078cc061d3f5b35fb650f6bc8f0f1dd72d134e5bfcdf45b6db79d781fb37")},
+                    {500, uint256S("0x000000047104eb030474b4f0c260dbbcdf7fa7441288a19c08c8be64cc1aec49")},
+                    {1500, uint256S("0x000000015ce99dc668585599606c31892d3be2e93e0ee6bb51d599c2fffd5b93")},
+                    {5000, uint256S("0x0000000000591321b74c0bdb697b859f6553ac69db64632d1353ad2debd6a6d8")},
+                    {8000, uint256S("0x00000000004bdac507d8db8dd8b80670705259f80e8c08b32ae4ea395e00ef66")},
+                    {12000, uint256S("0x00000000001a45336692852c86060c48ea1b20d9dfbf97f77433b2fe38351fd9")},
             	}
             }
         };
 
         chainTxData = ChainTxData{
-            // Update as we know more about the contents of the Meowcoin chain
-        	1661730843, // * UNIX timestamp of last known number of transactions 2021-06-18 22:03:06 UTC
-            0,    // * total number of transactions between genesis and that timestamp
-                        //   (the tx=... number in the SetBestChain debug.log lines)
-            0.0       // * estimated number of transactions per second after that timestamp
+            // Update as we know more about the contents of the Meowcoin chain from rpc: getchaintxstats 12000
+        	1663180291, // * UNIX timestamp of last known number of transactions
+            19553,      // * total number of transactions between genesis and that timestamp
+                        // * (the tx=... number in the SetBestChain debug.log lines)
+            0.02852278222660324 // * estimated number of transactions per second after that timestamp
         };
 
 

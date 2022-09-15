@@ -1,14 +1,16 @@
 Meowcoin Core
 ==================================
 
-https://Meowcoin.lol
+* Official Site - https://meowcoin.lol
+* Official Pool - https://pool.meowcoin.lol
+* Official Explorer - https://explorer.meowcoin.lol
 
 Meowcoin Specs
 -----------------
-P2P Port - 8788
-RPC Port - 9766
-Block Time - 1 min
-Block Reward - 5000 MEOW (3000 reward, 2000 donation)
+* P2P Port - 8788
+* RPC Port - 9766
+* Block Time - 1 min
+* Block Reward - 5000 MEOW (3000 reward, 2000 donation)
 
 What is Meowcoin?
 -----------------

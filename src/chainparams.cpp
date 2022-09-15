@@ -181,7 +181,7 @@ public:
 
 
         vSeeds.emplace_back("66.42.117.31", false);
-	    vSeeds.emplace_back("95.179.203.112", false);
+	    vSeeds.emplace_back("167.179.94.220", false);
 
         // Address start with M
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
@@ -348,7 +348,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 	    vSeeds.emplace_back("66.42.117.31", false);
-        vSeeds.emplace_back("95.179.203.112", false);
+        vSeeds.emplace_back("167.179.94.220", false);
 		
 	    base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,109);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,124);

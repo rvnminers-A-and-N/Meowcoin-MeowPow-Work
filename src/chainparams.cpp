@@ -155,10 +155,10 @@ public:
 
 
         // The best chain should have at least this much work
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000005de4c8dac20913"); // Block 12000
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000859d8e6ba8224a4"); // Block 50000
 
         // By default assume that the signatures in ancestors of this block are valid
-        consensus.defaultAssumeValid = uint256S("0x00000000001a45336692852c86060c48ea1b20d9dfbf97f77433b2fe38351fd9"); // Block 12000
+        consensus.defaultAssumeValid = uint256S("0x0000000000043a9280011ff1382e99ade4d90d51821cc4dadfb20bd1a0905b1c"); // Block 50000
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -211,16 +211,19 @@ public:
                     {5000, uint256S("0x0000000000591321b74c0bdb697b859f6553ac69db64632d1353ad2debd6a6d8")},
                     {8000, uint256S("0x00000000004bdac507d8db8dd8b80670705259f80e8c08b32ae4ea395e00ef66")},
                     {12000, uint256S("0x00000000001a45336692852c86060c48ea1b20d9dfbf97f77433b2fe38351fd9")},
+                    {15000, uint256S("0x0000000000063b1ef11f2032a117d84fe098efd655832de7b06559b9a214663b")},
+                    {25000, uint256S("0x0000000000095ef1f2e4e24d990552587e773be85e4bfbfdae467d4a57f58d6b")},
+                    {50000, uint256S("0x0000000000043a9280011ff1382e99ade4d90d51821cc4dadfb20bd1a0905b1c")},
             	}
             }
         };
 
         chainTxData = ChainTxData{
-            // Update as we know more about the contents of the Meowcoin chain from rpc: getchaintxstats 12000
-        	1663180291, // * UNIX timestamp of last known number of transactions
-            19553,      // * total number of transactions between genesis and that timestamp
+            // Update as we know more about the contents of the Meowcoin chain from rpc: getchaintxstats 50000
+        	1665504479, // * UNIX timestamp of last known number of transactions
+            99360,      // * total number of transactions between genesis and that timestamp
                         // * (the tx=... number in the SetBestChain debug.log lines)
-            0.02852278222660324 // * estimated number of transactions per second after that timestamp
+            0.03289449084985968 // * estimated number of transactions per second after that timestamp
         };
 
 

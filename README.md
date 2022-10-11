@@ -2,8 +2,8 @@ Meowcoin Core
 ==================================
 
 * Official Site - https://mewccrypto.com
-* Official Pool - https://pool.meowcoin.lol
-* Official Explorer - https://explorer.meowcoin.lol
+* Official Pool - https://pool.mewccrypto.com
+* Official Explorer - https://explorer.mewccrypto.com
 
 Meowcoin Specs
 -----------------

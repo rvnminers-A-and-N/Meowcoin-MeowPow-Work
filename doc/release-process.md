@@ -292,7 +292,7 @@ meowcoincoin.net (see below for meowcoincoin.net update instructions).
 
   - meowcoin-dev and meowcoin-core-dev mailing list
 
-  - Meowcoin Core announcements list https://meowcoin.lol/en/list/announcements/join/
+  - Meowcoin Core announcements list https://mewccrypto.com/en/list/announcements/join/
 
   - Update title of #meowcoin on Freenode IRC
 

@@ -137,7 +137,7 @@ Meowcoin repo's [root README](https://github.com/JustAResearcher/Meowcoin/blob/m
 - Discuss on the [MeowcoinTalk](https://www.bitcointalk.org/) forums, in the [Development & Technical Discussion board](---).
 - Discuss on chat [Discord](----), [Telegram](---) or [Reddit](---).
 - Find out more on the [Meowcoin Wiki](---)
-- Visit the project home [Meowcoin.lol](https://meowcoin.lol)
+- Visit the project home [mewccrypto.com](https://mewccrypto.com)
 
 ### Miscellaneous
 - [Assets Attribution](https://github.com/JustAResearcher/Meowcoin/blob/master/doc/assets-attribution.md)

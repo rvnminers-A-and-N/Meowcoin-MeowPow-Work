@@ -270,6 +270,7 @@ public:
 
         nKAAAWWWPOWActivationTime = 1662493424;
         nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
+        nMEOWPOWActivationTime = 1694822400;
     }
 };
 
@@ -426,6 +427,7 @@ public:
 
         nKAAAWWWPOWActivationTime = 1661833868;
         nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
+        nMEOWPOWActivationTime = 1694822400;
         /** MEOWCOIN End **/
     }
 };
@@ -575,6 +577,7 @@ public:
         // If you are looking to test the kawpow hashing function in regtest. You will need to change this number
         nKAAAWWWPOWActivationTime = 3582830167;
         nKAWPOWActivationTime = nKAAAWWWPOWActivationTime;
+        nMEOWPOWActivationTime = 1694822400;
         /** MEOWCOIN End **/
     }
 };

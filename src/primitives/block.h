@@ -20,6 +20,7 @@
  */
 
 extern uint32_t nKAWPOWActivationTime;
+extern uint32_t nMEOWPOWActivationTime;
 
 class BlockNetwork
 {
@@ -98,6 +99,7 @@ public:
 
     uint256 GetHashFull(uint256& mix_hash) const;
     uint256 GetKAWPOWHeaderHash() const;
+    uint256 GetMEOWPOWHeaderHash() const;
     std::string ToString() const;
 
     /// Use for testing algo switch
@@ -214,6 +216,31 @@ class CKAWPOWInput : private CBlockHeader
 {
 public:
     CKAWPOWInput(const CBlockHeader &header)
+    {
+        CBlockHeader::SetNull();
+        *((CBlockHeader*)this) = header;
+    }
+
+    ADD_SERIALIZE_METHODS;
+
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action) {
+        READWRITE(this->nVersion);
+        READWRITE(hashPrevBlock);
+        READWRITE(hashMerkleRoot);
+        READWRITE(nTime);
+        READWRITE(nBits);
+        READWRITE(nHeight);
+    }
+};
+/**
+ * Custom serializer for CBlockHeader that omits the nNonce and mixHash, for use
+ * as input to ProgPow.
+ */
+class CMEOWPOWInput : private CBlockHeader
+{
+public:
+    CMEOWPOWInput(const CBlockHeader &header)
     {
         CBlockHeader::SetNull();
         *((CBlockHeader*)this) = header;

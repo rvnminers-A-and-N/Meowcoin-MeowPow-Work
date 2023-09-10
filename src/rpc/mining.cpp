@@ -738,6 +738,26 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
         }
     }
 
+    if (pblock->nTime >= nMEOWPOWActivationTime) {
+        std::string address = gArgs.GetArg("-miningaddress", "");
+        if (IsValidDestinationString(address)) {
+            static std::string lastheader = "";
+            if (mapHVNKAWBlockTemplates.count(lastheader)) {
+                if (pblock->nTime - 30 < mapHVNKAWBlockTemplates.at(lastheader).nTime) {
+                    result.pushKV("pprpcheader", lastheader);
+                    result.pushKV("pprpcepoch", ethash::get_epoch_number(pblock->nHeight));
+                    return result;
+                }
+            }
+
+            pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
+            result.pushKV("pprpcheader", pblock->GetMEOWPOWHeaderHash().GetHex());
+            result.pushKV("pprpcepoch", ethash::get_epoch_number(pblock->nHeight));
+            mapHVNKAWBlockTemplates[pblock->GetMEOWPOWHeaderHash().GetHex()] = *pblock;
+            lastheader = pblock->GetMEOWPOWHeaderHash().GetHex();
+        }
+    }
+
     return result;
 }
 
@@ -759,11 +779,11 @@ protected:
     }
 };
 
-static UniValue getkawpowhash(const JSONRPCRequest& request) {
+static UniValue getmeowpowhash(const JSONRPCRequest& request) {
     if (request.fHelp || request.params.size() < 4) {
         throw std::runtime_error(
-                "getkawpowhash \"header_hash\" \"mix_hash\" nonce, height, \"target\"\n"
-                "\nGet the kawpow hash for a block given its block data\n"
+                "getmeowpowhash \"header_hash\" \"mix_hash\" nonce, height, \"target\"\n"
+                "\nGet the meowpow hash for a block given its block data\n"
 
                 "\nArguments\n"
                 "1. \"header_hash\"        (string, required) the prow_pow header hash that was given to the gpu miner from this rpc client\n"
@@ -773,8 +793,8 @@ static UniValue getkawpowhash(const JSONRPCRequest& request) {
                 "5. \"target\"             (string, optional) the target of the block that is hash is trying to meet\n"
                 "\nResult:\n"
                 "\nExamples:\n"
-                + HelpExampleCli("getkawpowhash", "\"header_hash\" \"mix_hash\" \"0x100000\" 2456")
-                + HelpExampleRpc("getkawpowhash", "\"header_hash\" \"mix_hash\" \"0x100000\" 2456")
+                + HelpExampleCli("getmeowpowhash", "\"header_hash\" \"mix_hash\" \"0x100000\" 2456")
+                + HelpExampleRpc("getmeowpowhash", "\"header_hash\" \"mix_hash\" \"0x100000\" 2456")
         );
     }
 
@@ -841,7 +861,7 @@ static UniValue pprpcsb(const JSONRPCRequest& request) {
     if (request.fHelp || request.params.size() != 3) {
         throw std::runtime_error(
                 "pprpcsb \"header_hash\" \"mix_hash\" \"nonce\"\n"
-                "\nAttempts to submit new block to network mined by kawpow gpu miner via rpc.\n"
+                "\nAttempts to submit new block to network mined by meowpow gpu miner via rpc.\n"
 
                 "\nArguments\n"
                 "1. \"header_hash\"        (string, required) the prow_pow header hash that was given to the gpu miner from this rpc client\n"
@@ -1288,7 +1308,7 @@ static const CRPCCommand commands[] =
     { "mining",             "getblocktemplate",       &getblocktemplate,       {"template_request"} },
     { "mining",             "submitblock",            &submitblock,            {"hexdata","dummy"} },
     { "mining",             "pprpcsb",                &pprpcsb,                {"header_hash","mix_hash", "nonce"} },
-    { "mining",             "getkawpowhash",          &getkawpowhash,          {"header_hash", "mix_hash", "nonce", "height"} },
+    { "mining",             "getmeowpowhash",         &getmeowpowhash,         {"header_hash", "mix_hash", "nonce", "height"} },
 
     /* Coin generation */
     { "generating",         "getgenerate",            &getgenerate,            {}  },

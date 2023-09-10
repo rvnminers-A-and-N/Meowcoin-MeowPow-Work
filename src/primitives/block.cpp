@@ -17,6 +17,7 @@ static const uint32_t TESTNET_X16RV2ACTIVATIONTIME = 1567533600;
 static const uint32_t REGTEST_X16RV2ACTIVATIONTIME = 1569931200;
 
 uint32_t nKAWPOWActivationTime;
+uint32_t nMEOWPOWActivationTime;
 
 BlockNetwork bNetwork = BlockNetwork();
 
@@ -49,8 +50,12 @@ uint256 CBlockHeader::GetHash() const
         }
 
         return HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
+    } else if (nTime >= nMeowPowActivationTime) {
+        uint256 mix_hash;
+        return MEOWPOWHash(*this, mix_hash);
     } else {
-        return KAWPOWHash_OnlyMix(*this);
+        uint256 mix_hash;
+        return KAWPOWHash(*this, mix_hash);
     }
 }
 
@@ -68,7 +73,11 @@ uint256 CBlockHeader::GetHashFull(uint256& mix_hash) const
         }
 
         return HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
+    } else if (nTime >= nMeowPowActivationTime) {
+        uint256 mix_hash;
+        return MEOWPOWHash(*this, mix_hash);
     } else {
+        uint256 mix_hash;
         return KAWPOWHash(*this, mix_hash);
     }
 }
@@ -94,6 +103,13 @@ uint256 CBlockHeader::GetX16RV2Hash() const
 uint256 CBlockHeader::GetKAWPOWHeaderHash() const
 {
     CKAWPOWInput input{*this};
+
+    return SerializeHash(input);
+}
+
+uint256 CBlockHeader::GetMEOWPOWHeaderHash() const
+{
+    CMEOWPOWInput input{*this};
 
     return SerializeHash(input);
 }

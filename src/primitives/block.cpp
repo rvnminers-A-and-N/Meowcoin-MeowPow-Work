@@ -51,11 +51,9 @@ uint256 CBlockHeader::GetHash() const
 
         return HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
     } else if (nTime >= nMeowPowActivationTime) {
-        uint256 mix_hash;
-        return MEOWPOWHash(*this, mix_hash);
+        return MEOWPOWHash_OnlyMix(*this, mix_hash);
     } else {
-        uint256 mix_hash;
-        return KAWPOWHash(*this, mix_hash);
+        return KAWPOWHash_OnlyMix(*this, mix_hash);
     }
 }
 

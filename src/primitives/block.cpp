@@ -50,7 +50,7 @@ uint256 CBlockHeader::GetHash() const
         }
 
         return HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
-    } else if (nTime >= nMeowPowActivationTime) {
+    } else if (nTime >= nMEOWPOWActivationTime) {
         return MEOWPOWHash_OnlyMix(*this);
     } else {
         return KAWPOWHash_OnlyMix(*this);

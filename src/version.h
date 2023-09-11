@@ -10,7 +10,7 @@
  * network protocol versioning
  */
 
-static const int PROTOCOL_VERSION = 70028;
+static const int PROTOCOL_VERSION = 70029;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -26,6 +26,9 @@ static const int X16RV2_VERSION = 70025;
 
 //! getassetdata reutrn asstnotfound, and assetdata doesn't have blockhash in the data
 static const int KAWPOW_VERSION = 70027;
+
+//! In this version, MeowPow algorithm implemented
+static const int MEOWPOW_VERSION = 70029;
 
 //! disconnect from peers older than this proto version
 //!!! Anytime this value is changed please also update the "MY_VERSION" value to match in the

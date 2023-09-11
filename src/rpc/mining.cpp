@@ -745,14 +745,14 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             if (mapHVNKAWBlockTemplates.count(lastheader)) {
                 if (pblock->nTime - 30 < mapHVNKAWBlockTemplates.at(lastheader).nTime) {
                     result.pushKV("pprpcheader", lastheader);
-                    result.pushKV("pprpcepoch", ethash::get_epoch_number(pblock->nHeight));
+                    result.pushKV("pprpcepoch", ethashprime::get_epoch_number(pblock->nHeight));
                     return result;
                 }
             }
 
             pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
             result.pushKV("pprpcheader", pblock->GetMEOWPOWHeaderHash().GetHex());
-            result.pushKV("pprpcepoch", ethash::get_epoch_number(pblock->nHeight));
+            result.pushKV("pprpcepoch", ethashprime::get_epoch_number(pblock->nHeight));
             mapHVNKAWBlockTemplates[pblock->GetMEOWPOWHeaderHash().GetHex()] = *pblock;
             lastheader = pblock->GetMEOWPOWHeaderHash().GetHex();
         }
@@ -819,15 +819,15 @@ static UniValue getmeowpowhash(const JSONRPCRequest& request) {
         fCheckTarget = true;
     }
 
-    static ethash::epoch_context_ptr context{nullptr, nullptr};
+    static ethashprime::epoch_context_ptr context{nullptr, nullptr};
 
     // Get the context from the block height
-    const auto epoch_number = ethash::get_epoch_number(nHeight);
+    const auto epoch_number = ethashprime::get_epoch_number(nHeight);
     if (!context || context->epoch_number != epoch_number)
-        context = ethash::create_epoch_context(epoch_number);
+        context = ethashprime::create_epoch_context(epoch_number);
 
     // ProgPow hash
-    const auto result = progpow::hash(*context, nHeight, header_hash, nNonce);
+    const auto result = progpowprime::hash(*context, nHeight, header_hash, nNonce);
 
     uint256 mined_mix_hash = uint256S(to_hex(result.mix_hash));
     uint256 mined_final_hash = uint256S(to_hex(result.final_hash));

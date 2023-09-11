@@ -38,6 +38,7 @@
 #include "algo/gost_streebog.h"
 
 #include <crypto/ethash/helpers.hpp>
+#include <crypto/ethash/helpersprime.hpp>
 
 #include <vector>
 

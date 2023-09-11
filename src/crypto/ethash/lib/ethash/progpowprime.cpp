@@ -154,18 +154,18 @@ static const uint32_t round_constants[22] = {
         0x00008080,
 };
 
-static const uint32_t meowcoincoin_kawpow[15] = {
-        0x00000072, //R
-        0x00000041, //A
-        0x00000056, //V
+static const uint32_t meowcoin_meowpow[15] = {
+        0x0000004D, //M
         0x00000045, //E
-        0x0000004E, //N
+        0x0000004F, //O
+        0x00000057, //W
         0x00000043, //C
         0x0000004F, //O
         0x00000049, //I
         0x0000004E, //N
-        0x0000004B, //K
-        0x00000041, //A
+        0x0000004D, //M
+        0x00000045, //E
+        0x0000004F, //O
         0x00000057, //W
         0x00000050, //P
         0x0000004F, //O
@@ -314,9 +314,9 @@ result hash(const epoch_context& context, int block_number, const hash256& heade
         state[8] = nonce;
         state[9] = nonce >> 32;
 
-        // 3rd apply meowcoincoin input constraints
+        // 3rd apply meowcoin input constraints
         for (int i = 10; i < 25; i++)
-            state[i] = meowcoincoin_kawpow[i-10];
+            state[i] = meowcoin_meowpow[i-10];
 
         keccak_progpowprime_64(state);
 
@@ -340,9 +340,9 @@ result hash(const epoch_context& context, int block_number, const hash256& heade
     for (int i = 8; i < 16; i++)
         state[i] = mix_hash.word32s[i-8];
 
-    // 3rd apply meowcoincoin input constraints
+    // 3rd apply meowcoin input constraints
     for (int i = 16; i < 25; i++)
-        state[i] = meowcoincoin_kawpow[i - 16];
+        state[i] = meowcoin_meowpow[i - 16];
 
     // Run keccak loop
     keccak_progpowprime_256(state);
@@ -388,9 +388,9 @@ result hash(const epoch_context_full& context, int block_number, const hash256& 
         state[8] = nonce;
         state[9] = nonce >> 32;
 
-        // 3rd apply meowcoincoin input constraints
+        // 3rd apply meowcoin input constraints
         for (int i = 10; i < 25; i++)
-            state[i] = meowcoincoin_kawpow[i-10];
+            state[i] = meowcoin_meowpow[i-10];
 
         keccak_progpowprime_64(state);
 
@@ -415,9 +415,9 @@ result hash(const epoch_context_full& context, int block_number, const hash256& 
     for (int i = 8; i < 16; i++)
         state[i] = mix_hash.word32s[i-8];
 
-    // 3rd apply meowcoincoin input constraints
+    // 3rd apply meowcoin input constraints
     for (int i = 16; i < 25; i++)
-        state[i] = meowcoincoin_kawpow[i - 16];
+        state[i] = meowcoin_meowpow[i - 16];
 
     // Run keccak loop
     keccak_progpowprime_256(state);
@@ -450,7 +450,7 @@ bool verify(const epoch_context& context, int block_number, const hash256& heade
 
         // 3rd apply meowcoincoin input constraints
         for (int i = 10; i < 25; i++)
-            state[i] = meowcoincoin_kawpow[i-10];
+            state[i] = meowcoin_meowpow[i-10];
 
         keccak_progpowprime_64(state);
 
@@ -473,9 +473,9 @@ bool verify(const epoch_context& context, int block_number, const hash256& heade
     for (int i = 8; i < 16; i++)
         state[i] = mix_hash.word32s[i-8];
 
-    // 3rd apply meowcoincoin input constraints
+    // 3rd apply meowcoin input constraints
     for (int i = 16; i < 25; i++)
-        state[i] = meowcoincoin_kawpow[i - 16];
+        state[i] = meowcoin_meowpow[i - 16];
 
     // Run keccak loop
     keccak_progpowprime_256(state);
@@ -513,9 +513,9 @@ hash256 hash_no_verify(const int& block_number, const hash256& header_hash,
         state[8] = nonce;
         state[9] = nonce >> 32;
 
-        // 3rd apply meowcoincoin input constraints
+        // 3rd apply meowcoin input constraints
         for (int i = 10; i < 25; i++)
-            state[i] = meowcoincoin_kawpow[i-10];
+            state[i] = meowcoin_meowpow[i-10];
 
         keccak_progpowprime_64(state);
 
@@ -535,9 +535,9 @@ hash256 hash_no_verify(const int& block_number, const hash256& header_hash,
     for (int i = 8; i < 16; i++)
         state[i] = mix_hash.word32s[i-8];
 
-    // 3rd apply meowcoincoin input constraints
+    // 3rd apply meowcoin input constraints
     for (int i = 16; i < 25; i++)
-        state[i] = meowcoincoin_kawpow[i - 16];
+        state[i] = meowcoin_meowpow[i - 16];
 
     // Run keccak loop
     keccak_progpowprime_256(state);

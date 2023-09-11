@@ -106,7 +106,7 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     // change the DGW math.
     if (pblock->nTime >= nMEOWPOWActivationTime) {
         if (nMEOWPOWBlocksFound != nPastBlocks) {
-            const arith_uint256 bnMeowPowLimit = UintToArith256(params.kawpowLimit);
+            const arith_uint256 bnMeowPowLimit = UintToArith256(params.meowpowLimit);
             return bnMeowPowLimit.GetCompact();
         }
     }

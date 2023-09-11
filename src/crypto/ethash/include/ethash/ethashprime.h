@@ -24,12 +24,12 @@ extern "C" {
  * The Ethashprime algorithm revision implemented as specified in the Ethashprime spec
  * https://github.com/ethereum/wiki/wiki/Ethashprime.
  */
-#define ETHASHPRIME_REVISION "23"
+#define ETHASHPRIME_REVISION "24"
 
-#define ETHASHPRIME_EPOCH_LENGTH 7500
-#define ETHASHPRIME_LIGHT_CACHE_ITEM_SIZE 64
-#define ETHASHPRIME_FULL_DATASET_ITEM_SIZE 128
-#define ETHASHPRIME_NUM_DATASET_ACCESSES 64
+#define ETHASHPRIME_EPOCH_LENGTH 15000
+#define ETHASHPRIME_LIGHT_CACHE_ITEM_SIZE 32
+#define ETHASHPRIME_FULL_DATASET_ITEM_SIZE 64
+#define ETHASHPRIME_NUM_DATASET_ACCESSES 32
 
 
 struct ethashprime_epoch_context

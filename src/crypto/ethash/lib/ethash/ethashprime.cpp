@@ -19,12 +19,12 @@
 namespace ethashprime
 {
 // Internal constants:
-constexpr static int light_cache_init_size = 1 << 24;
-constexpr static int light_cache_growth = 1 << 17;
-constexpr static int light_cache_rounds = 3;
-constexpr static int full_dataset_init_size = 1 << 30;
-constexpr static int full_dataset_growth = 1 << 23;
-constexpr static int full_dataset_item_parents = 512;
+constexpr static int light_cache_init_size = 1 << 12;
+constexpr static int light_cache_growth = 1 << 8;
+constexpr static int light_cache_rounds = 2;
+constexpr static int full_dataset_init_size = 1 << 15;
+constexpr static int full_dataset_growth = 1 << 11;
+constexpr static int full_dataset_item_parents = 256;
 
 // Verify constants:
 static_assert(sizeof(hash512) == ETHASHPRIME_LIGHT_CACHE_ITEM_SIZE, "");
@@ -139,7 +139,7 @@ epoch_context_full* create_epoch_context(
     const size_t light_cache_size = get_light_cache_size(light_cache_num_items);
     const size_t full_dataset_size =
         full ? static_cast<size_t>(full_dataset_num_items) * sizeof(hash1024) :
-               progpow::l1_cache_size;
+               progpowprime::l1_cache_size;
 
     const size_t alloc_size = context_alloc_size + light_cache_size + full_dataset_size;
 

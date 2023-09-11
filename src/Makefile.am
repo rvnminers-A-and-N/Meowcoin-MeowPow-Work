@@ -369,7 +369,31 @@ crypto_libmeowcoin_crypto_a_SOURCES = \
   crypto/ethash/lib/keccak/keccakf800.c \
   crypto/ethash/lib/support/attributes.h \
   crypto/ethash/helpers.hpp \
-  crypto/ethash/progpow_test_vectors.hpp
+  crypto/ethash/include/ethash/ethashprime.h \
+  crypto/ethash/include/ethash/ethashprime.hpp \
+  crypto/ethash/include/ethash/hash_typesprime.h \
+  crypto/ethash/include/ethash/hash_typesprime.hpp \
+  crypto/ethash/include/ethash/keccakprime.h \
+  crypto/ethash/include/ethash/keccakprime.hpp \
+  crypto/ethash/include/ethash/progpowprime.hpp \
+  crypto/ethash/include/ethash/versionprime.h \
+  crypto/ethash/lib/ethash/bit_manipulation.h \
+  crypto/ethash/lib/ethash/builtins.h \
+  crypto/ethash/lib/ethash/endiannessprime.hpp \
+  crypto/ethash/lib/ethash/ethashprime.cpp \
+  crypto/ethash/lib/ethash/ethash-internalprime.hpp \
+  crypto/ethash/lib/ethash/kiss99.hpp \
+  crypto/ethash/lib/ethash/managedprime.cpp \
+  crypto/ethash/lib/ethash/primesprime.c \
+  crypto/ethash/lib/ethash/primesprime.h \
+  crypto/ethash/lib/ethash/progpowprime.cpp \
+  crypto/ethash/lib/keccak/keccakprime.c \
+  crypto/ethash/lib/keccak/keccakf1600.c \
+  crypto/ethash/lib/keccak/keccakf800.c \
+  crypto/ethash/lib/support/attributes.h \
+  crypto/ethash/helpersprime.hpp \
+  crypto/ethash/progpow_test_vectors.hpp \
+  crypto/ethash/progpow_test_vectorsprime.hpp
 
 if USE_ASM
 crypto_libmeowcoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp

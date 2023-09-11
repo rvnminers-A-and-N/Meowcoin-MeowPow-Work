@@ -51,9 +51,9 @@ uint256 CBlockHeader::GetHash() const
 
         return HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
     } else if (nTime >= nMeowPowActivationTime) {
-        return MEOWPOWHash_OnlyMix(*this, mix_hash);
+        return MEOWPOWHash_OnlyMix(*this);
     } else {
-        return KAWPOWHash_OnlyMix(*this, mix_hash);
+        return KAWPOWHash_OnlyMix(*this);
     }
 }
 
@@ -71,7 +71,7 @@ uint256 CBlockHeader::GetHashFull(uint256& mix_hash) const
         }
 
         return HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
-    } else if (nTime >= nMeowPowActivationTime) {
+    } else if (nTime >= nMEOWPOWActivationTime) {
         uint256 mix_hash;
         return MEOWPOWHash(*this, mix_hash);
     } else {

@@ -382,7 +382,9 @@ crypto_libmeowcoin_crypto_a_SOURCES = \
   crypto/ethash/lib/keccak/keccak.c \
   crypto/ethash/lib/keccak/keccakprime.c \
   crypto/ethash/lib/keccak/keccakf1600.c \
+  crypto/ethash/lib/keccak/keccakf1600prime.c \
   crypto/ethash/lib/keccak/keccakf800.c \
+  crypto/ethash/lib/keccak/keccakf800prime.c \
   crypto/ethash/lib/support/attributes.h \
   crypto/ethash/helpers.hpp \
   crypto/ethash/helpersprime.hpp \

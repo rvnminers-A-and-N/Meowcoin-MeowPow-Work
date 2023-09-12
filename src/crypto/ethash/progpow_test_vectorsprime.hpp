@@ -3,14 +3,14 @@
 // Licensed under the Apache License, Version 2.0.
 
 /// @file
-/// ProgPoW test vectors.
+/// progpowprime test vectors.
 
 #pragma once
 
 namespace  // In anonymous namespace to allow including in multiple compilation units.
 {
-/// Defines a test case for ProgPoW hash() function.
-struct progpow_hash_test_case
+/// Defines a test case for progpowprime hash() function.
+struct progpowprime_hash_test_case
 {
     int block_number;
     const char* header_hash_hex;
@@ -19,7 +19,7 @@ struct progpow_hash_test_case
     const char* final_hash_hex;
 };
 
-progpow_hash_test_case progpow_hash_test_cases[] = {
+progpowprime_hash_test_case progpowprime_hash_test_cases[] = {
     {0, "0000000000000000000000000000000000000000000000000000000000000000", "0000000000000000",
         "6e97b47b134fda0c7888802988e1a373affeb28bcd813b6e9a0fc669c935d03a",
         "e601a7257a70dc48fccc97a7330d704d776047623b92883d77111fb36870f3d1"},

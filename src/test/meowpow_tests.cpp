@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(meowpow_hash_empty)
     auto& context = get_ethashprime_epoch_context_0();
 
     int count = 1000;
-    ethash_result result;
+    ethashprime_result result;
     while (count > 0) {
         result = progpowprime::hash(context, count, {}, 0);
         --count;

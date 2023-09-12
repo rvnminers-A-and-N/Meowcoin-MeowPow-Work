@@ -890,7 +890,7 @@ static UniValue getmeowpowhash(const JSONRPCRequest& request) {
     if (nHeight > (uint32_t)chainActive.Height() + 10)
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block height is to large");
 
-    const auto header_hash = to_hash256(str_header_hash);
+    const auto header_hash = to_hash256Prime(str_header_hash);
 
     uint256 target;
     bool fCheckTarget = false;
@@ -909,8 +909,8 @@ static UniValue getmeowpowhash(const JSONRPCRequest& request) {
     // ProgPow hash
     const auto result = progpowprime::hash(*context, nHeight, header_hash, nNonce);
 
-    uint256 mined_mix_hash = uint256S(to_hex(result.mix_hash));
-    uint256 mined_final_hash = uint256S(to_hex(result.final_hash));
+    uint256 mined_mix_hash = uint256S(to_hexPrime(result.mix_hash));
+    uint256 mined_final_hash = uint256S(to_hexPrime(result.final_hash));
 
     bool mix_hash_match = false;
     bool final_hash_meets_target = false;

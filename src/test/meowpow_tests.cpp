@@ -51,15 +51,15 @@ BOOST_AUTO_TEST_CASE(meowpow_hash_empty)
 
     const auto mix_hex = "6e97b47b134fda0c7888802988e1a373affeb28bcd813b6e9a0fc669c935d03a";
     const auto final_hex = "e601a7257a70dc48fccc97a7330d704d776047623b92883d77111fb36870f3d1";
-    BOOST_CHECK_EQUAL(to_hex(result.mix_hash), mix_hex);
-    BOOST_CHECK_EQUAL(to_hex(result.final_hash), final_hex);
+    BOOST_CHECK_EQUAL(to_hexPrime(result.mix_hash), mix_hex);
+    BOOST_CHECK_EQUAL(to_hexPrime(result.final_hash), final_hex);
 }
 
 BOOST_AUTO_TEST_CASE(meowpow_hash_30000)
 {
     const int block_number = 30000;
     const auto header =
-            to_hash256("ffeeddccbbaa9988776655443322110000112233445566778899aabbccddeeff");
+            to_hash256Prime("ffeeddccbbaa9988776655443322110000112233445566778899aabbccddeeff");
     const uint64_t nonce = 0x123456789abcdef0;
 
     auto context = ethashprime::create_epoch_context(ethash::get_epoch_number(block_number));
@@ -67,8 +67,8 @@ BOOST_AUTO_TEST_CASE(meowpow_hash_30000)
     const auto result = progpowprime::hash(*context, block_number, header, nonce);
     const auto mix_hex = "177b565752a375501e11b6d9d3679c2df6197b2cab3a1ba2d6b10b8c71a3d459";
     const auto final_hex = "c824bee0418e3cfb7fae56e0d5b3b8b14ba895777feea81c70c0ba947146da69";
-    BOOST_CHECK_EQUAL(to_hex(result.mix_hash), mix_hex);
-    BOOST_CHECK_EQUAL(to_hex(result.final_hash), final_hex);
+    BOOST_CHECK_EQUAL(to_hexPrime(result.mix_hash), mix_hex);
+    BOOST_CHECK_EQUAL(to_hexPrime(result.final_hash), final_hex);
 
 }
 
@@ -82,11 +82,11 @@ BOOST_AUTO_TEST_CASE(meowpow_hash_and_verify)
         if (!context || context->epoch_number != epoch_number)
             context = ethashprime::create_epoch_context(epoch_number);
 
-        const auto header_hash = to_hash256(t.header_hash_hex);
+        const auto header_hash = to_hash256Prime(t.header_hash_hex);
         const auto nonce = std::stoull(t.nonce_hex, nullptr, 16);
         const auto result = progpowprime::hash(*context, t.block_number, header_hash, nonce);
-        BOOST_CHECK_EQUAL(to_hex(result.mix_hash), t.mix_hash_hex);
-        BOOST_CHECK_EQUAL(to_hex(result.final_hash), t.final_hash_hex);
+        BOOST_CHECK_EQUAL(to_hexPrime(result.mix_hash), t.mix_hash_hex);
+        BOOST_CHECK_EQUAL(to_hexPrime(result.final_hash), t.final_hash_hex);
 
         auto success = progpowprime::verify(
                 *context, t.block_number, header_hash, result.mix_hash, nonce, result.final_hash);
@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_CASE(meowpow_search)
     auto& ctx = *ctxp;
     auto& ctxl = reinterpret_cast<const ethashprime::epoch_context&>(ctx);
 
-    auto boundary = to_hash256("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+    auto boundary = to_hash256Prime("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
     auto sr = progpowprime::search(ctx, 0, {}, boundary, 700, 100);
     auto srl = progpowprime::search_light(ctxl, 0, {}, boundary, 700, 100);
 

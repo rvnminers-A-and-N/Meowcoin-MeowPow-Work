@@ -10,7 +10,7 @@
 
 #include <crypto/ethash/include/ethash/ethashprime.hpp>
 
-#include "endianness.hpp"
+#include "endiannessprime.hpp"
 
 #include <memory>
 #include <vector>

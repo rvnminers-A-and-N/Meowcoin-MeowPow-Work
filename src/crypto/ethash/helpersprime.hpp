@@ -9,7 +9,7 @@
 #include <string>
 
 template <typename HashPrime>
-inline std::string to_hex(const HashPrime& h)
+inline std::string to_hexPrime(const HashPrime& h)
 {
     static const auto hex_chars = "0123456789abcdef";
     std::string str;

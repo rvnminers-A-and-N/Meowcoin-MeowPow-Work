@@ -307,8 +307,8 @@ uint256 MEOWPOWHash(const CBlockHeader& blockHeader, uint256& mix_hash)
     // ProgPow hash
     const auto result = progpowprime::hash(*context, blockHeader.nHeight, header_hash, blockHeader.nNonce64);
 
-    mix_hash = uint256S(to_hex(result.mix_hash));
-    return uint256S(to_hex(result.final_hash));
+    mix_hash = uint256S(to_hexPrime(result.mix_hash));
+    return uint256S(to_hexPrime(result.final_hash));
 }
 
 
@@ -321,7 +321,7 @@ uint256 MEOWPOWHash_OnlyMix(const CBlockHeader& blockHeader)
     // ProgPow hash
     const auto result = progpowprime::hash_no_verify(blockHeader.nHeight, header_hash, to_hash256Prime(blockHeader.mix_hash.GetHex()), blockHeader.nNonce64);
 
-    return uint256S(to_hex(result));
+    return uint256S(to_hexPrime(result));
 }
 
 

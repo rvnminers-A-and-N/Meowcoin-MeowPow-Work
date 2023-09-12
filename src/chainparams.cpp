@@ -182,6 +182,7 @@ public:
 
 
         vSeeds.emplace_back("seed-mainnet-mewc.meowcoin.cc", false);
+        vSeeds.emplace_back("mewc-main.crypticwizardry.com", false);
 
         // Address start with M
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
@@ -353,6 +354,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 	    vSeeds.emplace_back("seed-testnet-mewc.meowcoin.cc", false);
+        vSeeds.emplace_back("mewc-test.crypticwizardry.com", false);
 		
 	    base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,109);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,124);

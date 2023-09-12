@@ -32,8 +32,10 @@
 
 #include <univalue.h>
 #include <crypto/ethash/include/ethash/ethash.hpp>
+#include <crypto/ethash/include/ethash/ethashprime.hpp>
 #include <consensus/merkle.h>
 #include <crypto/ethash/include/ethash/progpow.hpp>
+#include <crypto/ethash/include/ethash/progpowprime.hpp>
 
 extern uint64_t nHashesPerSec;
 

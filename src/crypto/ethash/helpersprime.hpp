@@ -8,8 +8,8 @@
 
 #include <string>
 
-template <typename Hash>
-inline std::string to_hex(const Hash& h)
+template <typename HashPrime>
+inline std::string to_hex(const HashPrime& h)
 {
     static const auto hex_chars = "0123456789abcdef";
     std::string str;
@@ -22,7 +22,7 @@ inline std::string to_hex(const Hash& h)
     return str;
 }
 
-inline ethashprime::hash256 to_hash256(const std::string& hex)
+inline ethashprime::hash256 to_hash256Prime(const std::string& hex)
 {
     auto parse_digit = [](char d) -> int { return d <= '9' ? (d - '0') : (d - 'a' + 10); };
 

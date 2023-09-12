@@ -302,7 +302,7 @@ uint256 MEOWPOWHash(const CBlockHeader& blockHeader, uint256& mix_hash)
 
     // Build the header_hash
     uint256 nHeaderHash = blockHeader.GetMEOWPOWHeaderHash();
-    const auto header_hash = to_hash256(nHeaderHash.GetHex());
+    const auto header_hash = to_hash256Prime(nHeaderHash.GetHex());
 
     // ProgPow hash
     const auto result = progpowprime::hash(*context, blockHeader.nHeight, header_hash, blockHeader.nNonce64);
@@ -316,10 +316,10 @@ uint256 MEOWPOWHash_OnlyMix(const CBlockHeader& blockHeader)
 {
     // Build the header_hash
     uint256 nHeaderHash = blockHeader.GetMEOWPOWHeaderHash();
-    const auto header_hash = to_hash256(nHeaderHash.GetHex());
+    const auto header_hash = to_hash256Prime(nHeaderHash.GetHex());
 
     // ProgPow hash
-    const auto result = progpowprime::hash_no_verify(blockHeader.nHeight, header_hash, to_hash256(blockHeader.mix_hash.GetHex()), blockHeader.nNonce64);
+    const auto result = progpowprime::hash_no_verify(blockHeader.nHeight, header_hash, to_hash256Prime(blockHeader.mix_hash.GetHex()), blockHeader.nNonce64);
 
     return uint256S(to_hex(result));
 }

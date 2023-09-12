@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(meowpow_l1_cache)
     }
 }
 
-BOOST_AUTO_TEST_CASE(kawpow_hash_empty)
+BOOST_AUTO_TEST_CASE(meowpow_hash_empty)
 {
     auto& context = get_ethashprime_epoch_context_0();
 
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(kawpow_hash_empty)
     BOOST_CHECK_EQUAL(to_hex(result.final_hash), final_hex);
 }
 
-BOOST_AUTO_TEST_CASE(kawpow_hash_30000)
+BOOST_AUTO_TEST_CASE(meowpow_hash_30000)
 {
     const int block_number = 30000;
     const auto header =
@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(kawpow_hash_30000)
 
 }
 
-BOOST_AUTO_TEST_CASE(kawpow_hash_and_verify)
+BOOST_AUTO_TEST_CASE(meowpow_hash_and_verify)
 {
     ethashprime::epoch_context_ptr context{nullptr, nullptr};
 
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(kawpow_hash_and_verify)
     }
 }
 
-BOOST_AUTO_TEST_CASE(kawpow_search)
+BOOST_AUTO_TEST_CASE(meowpow_search)
 {
     auto ctxp = ethashprime::create_epoch_context_full(0);
     auto& ctx = *ctxp;

@@ -22,7 +22,7 @@ namespace ethashprime
 constexpr static int light_cache_init_size = 1 << 12;
 constexpr static int light_cache_growth = 1 << 8;
 constexpr static int light_cache_rounds = 2;
-constexpr static int full_dataset_init_size = 1 << 15;
+constexpr static int full_dataset_init_size = (1U << 30)*5;
 constexpr static int full_dataset_growth = 1 << 11;
 constexpr static int full_dataset_item_parents = 256;
 
